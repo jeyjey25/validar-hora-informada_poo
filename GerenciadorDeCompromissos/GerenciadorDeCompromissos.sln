@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GerenciadorDeCompromissos", "GerenciadorDeCompromissos\GerenciadorDeCompromissos.csproj", "{255A5441-0CF9-4A32-BED1-F945474F57AC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp", "GerenciadorDeCompromissos\ConsoleApp.csproj", "{255A5441-0CF9-4A32-BED1-F945474F57AC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
