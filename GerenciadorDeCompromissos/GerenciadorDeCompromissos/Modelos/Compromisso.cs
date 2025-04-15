@@ -3,20 +3,32 @@ namespace ConsoleApp.Modelos;
 public class Compromisso
 {
     private DateTime _data;
-    public String Data
+    private TimeSpan _hora;
+
+    public string Data
     {
-        get { return _data.ToString(); }
+        get { return _data.ToString("dd/MM/yyyy"); }
         set
         {
             _validarDataInformada(value);
             _validarDataValidaParaCompromisso();
         }
     }
-    public TimeSpan Hora { get; set; }
+
+    public string Hora
+    {
+        get { return _hora.ToString(); }
+        set
+        {
+            _validarHoraInformada(value);
+        }
+    }
+
     public string Descricao { get; set; }
     public string Local { get; set; }
 
-    private void _validarDataInformada(string data) {
+    private void _validarDataInformada(string data)
+    {
         if (!DateTime.TryParseExact(data,
                        "dd/MM/yyyy",
                        System.Globalization.CultureInfo.GetCultureInfo("pt-BR"),
@@ -27,41 +39,24 @@ public class Compromisso
         }
     }
 
-    private void _validarDataValidaParaCompromisso() {
-        if (_data<=DateTime.Now) {
-            throw new Exception($"Data {_data.ToString("dd/MM/yyyy")} é inferior a permitida.");
+    private void _validarDataValidaParaCompromisso()
+    {
+        if (_data < DateTime.Today)
+        {
+            throw new Exception($"Data {_data.ToString("dd/MM/yyyy")} é inferior à permitida.");
         }
-        // if (_data == null) {
-        //     throw new Exception("Data ainda não informada");
-        // }
     }
-    // private TimeSpan _hora;
-    // public TimeSpan Hora
-    // {
-    //     get { return _hora; }
-    //     set { _hora = value; }
-    // }
 
-    // private DateTime _data;
+    private void _validarHoraInformada(string hora)
+    {
+        if (!TimeSpan.TryParse(hora, out _hora))
+        {
+            throw new Exception($"Hora {hora} inválida!");
+        }
 
-    // public DateTime Data {
-    //     get {
-    //         return _data;
-    //     }
-    //     set {
-    //         _data = value;
-    //     }
-    // }
-
-    // public string DataBR() {
-    //     return _data.ToString("dd/MM/yyyy");
-    // }
-
-    // public void RegistrarData(DateTime data) {
-    //     _data = data;
-    // }
-
-    // public DateTime ObterData() {
-    //     return _data;
-    // }
-}
+        if (_data.Date == DateTime.Today && _hora < DateTime.Now.TimeOfDay)
+        {
+            throw new Exception($"Hora {hora} já passou para o dia de hoje.");
+        }
+    }
+}  
